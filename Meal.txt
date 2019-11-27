@@ -1,0 +1,3 @@
+10@Egg
+20@Fries
+5@Water
