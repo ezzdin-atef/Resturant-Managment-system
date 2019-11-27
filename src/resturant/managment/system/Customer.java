@@ -9,7 +9,8 @@ public class Customer extends Person {
     public static ArrayList <Customer> Customers = new ArrayList<Customer>();
     public Customer() {}
     public Customer(String firstname, String lastname) {
-        
+        loadFromFile();
+        setId( Customers.get(Customers.size()-1).getId()+1 );
         setFname(firstname);
         setLname(lastname);
     }
@@ -67,6 +68,9 @@ public class Customer extends Person {
         Customers.remove(index);
         commitToFile();
     } 
+    
+    
+    
     
     @Override 
     public String toString() {

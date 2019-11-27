@@ -109,7 +109,63 @@ public class ResturantManagmentSystem {
                 }
                 break;
             case 2:
-                System.out.println("Not Working Yet ^_^");
+                Emplyee e = new Emplyee();
+                System.out.print("Enter Your ID: ");
+                int ID = in.nextInt();
+                if (e.login(ID)) {
+                    System.out.println("Welcome ");
+                    System.out.println("Enter 1 to update your information\nEnter 2 to add new customer\nEnter 3 to delete an customer with his id\nEnter 4 Seaech about customer\nEnter 5 Display all customers\nEnter 6 Update an customer");
+                    int enter = in.nextInt();
+                    in.nextLine();
+                    switch (enter) {
+                        case 1:
+                            Emplyee x = new Emplyee();
+                            System.out.print("Enter new first name: ");
+                            String fname = in.nextLine();
+                            System.out.print("Enter new last name: ");
+                            String lname = in.nextLine();
+                            x.setFname(fname);
+                            x.setLname(lname);
+                            x.setId(ID);
+                            e.updateEmplyee(ID, x);
+                            break;
+                        case 2:
+                            System.out.print("Enter new first name: ");
+                            fname = in.nextLine();
+                            System.out.print("Enter new last name: ");
+                            lname = in.nextLine();
+                            e.addNewCustomer(fname, lname);
+                            break;
+                        case 3:
+                            System.out.print("Enter the customer id to be deleted: ");
+                            int customerId = in.nextInt();
+                            e.deleteCustomer(customerId);
+                            break;
+                        case 4:
+                            System.out.print("Enter the customer id to search about him : ");
+                            customerId = in.nextInt();
+                            e.searchForCustomer(customerId);
+                            break;
+                        case 5:
+                            e.displayCustomers();
+                            break;
+                        case 6:
+                            Customer c = new Customer();
+                            System.out.print("Enter the customer id to update his information : ");
+                            customerId = in.nextInt();
+                            in.nextLine();
+                            System.out.print("Enter new first name: ");
+                            fname = in.nextLine();
+                            System.out.print("Enter new last name: ");
+                            lname = in.nextLine();
+                            c.setFname(fname);
+                            c.setLname(lname);
+                            e.updateCustomer(customerId, c);
+                            break;
+                    }
+                } else {
+                    System.out.println("ID Not Found!!");
+                }
                 break;
         }
     }

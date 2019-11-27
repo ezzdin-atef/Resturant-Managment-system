@@ -46,8 +46,6 @@ public class Admin extends Person {
         commitToFile();
     }
     /*================================End Admin Part================================*/
-    
-    
     /*================================Start Emplyee Part================================*/
     public void addNewEmplyee(String fname, String lname) {
         Emplyee x = new Emplyee(fname, lname);
@@ -80,7 +78,7 @@ public class Admin extends Person {
         System.out.println("deleted Successfully ... !");
     }
     /*================================End Emplyee Part================================*/
-    
+    /*================================Start Meals Part================================*/
     public void addNewMeal(int price, String name) {
         Meal m = new Meal(price, name);
         if (m.addMeal())
@@ -106,7 +104,7 @@ public class Admin extends Person {
         m.deleteMeal(name);
         System.out.println("deleted Successfully ... !");
     }
-    
+    /*================================End Meals Part================================*/
     public boolean login(String user, String pass) {
         loadFromFile();
         return user.equals((Admins.get(0)).username) && pass.equals((Admins.get(0)).password);

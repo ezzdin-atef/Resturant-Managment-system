@@ -72,12 +72,46 @@ public class Emplyee extends Person {
         Emplyees.remove(index);
         commitToFile();
     } 
+
+    /*================================Start Customer Part================================*/
+    public void addNewCustomer(String fname, String lname) {
+        Customer x = new Customer(fname, lname);
+        if (x.addCustomer()) {
+            System.out.println(x.toString() + "Added Successfully ... !");
+        } else {
+            System.out.println("Failed to insert ... !");
+        }
+    }
+
+    public void displayCustomers() {
+        Customer x = new Customer();
+        System.out.println(x.displayAllCustomer());
+    }
+
+    public void searchForCustomer(int id) {
+        Customer x = new Customer();
+        System.out.println(x.searchCustomer(id));
+    }
+
+    public void updateCustomer(int oldID, Customer newCustomerValues) {
+        Customer x = new Customer();
+        x.updateCustomer(oldID, newCustomerValues);
+        System.out.println("Updated Successfully ... !");
+    }
+
+    public void deleteCustomer(int Id) {
+        Customer x = new Customer();
+        x.deleteCustomer(Id);
+        System.out.println("deleted Successfully ... !");
+    }
+    /*================================End Customer Part================================*/
     
 
     public boolean login(int ID) {
         loadFromFile();
         return getEmlyeeIndex(ID)!= -1;
     }
+    
     
     @Override 
     public String toString() {

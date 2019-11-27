@@ -61,13 +61,27 @@ public class FileManager {
                 String Line = Reader.nextLine();
                 String[] seprator = Line.split("@");
                 
-                // 1@Admin@Admin@Ezzdin@Atef
                 x.setId(Integer.parseInt(seprator[0]));
                 x.setFname(seprator[1]);
                 x.setLname(seprator[2]);
                 Emplyees.add(x);
             }
             return (ArrayList<Object>) (Object) Emplyees;
+        }else if (FilePath.equals("Customer.txt")) {
+            ArrayList<Customer> Customers = new ArrayList<Customer>();
+            Customer x;
+            
+            while (Reader.hasNext()) {
+                x = new Customer();
+                String Line = Reader.nextLine();
+                String[] seprator = Line.split("@");
+                
+                x.setId(Integer.parseInt(seprator[0]));
+                x.setFname(seprator[1]);
+                x.setLname(seprator[2]);
+                Customers.add(x);
+            }
+            return (ArrayList<Object>) (Object) Customers;
         }else if (FilePath.equals("Meal.txt")) {
             ArrayList<Meal> Meals = new ArrayList<Meal>();
             Meal x;
@@ -77,7 +91,6 @@ public class FileManager {
                 String Line = Reader.nextLine();
                 String[] seprator = Line.split("@");
                 
-                // 1@Admin@Admin@Ezzdin@Atef
                 x.setPrice(Integer.parseInt(seprator[0]));
                 x.setName(seprator[1]);
                 Meals.add(x);
