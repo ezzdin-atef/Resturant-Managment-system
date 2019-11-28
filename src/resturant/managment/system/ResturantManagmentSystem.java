@@ -115,7 +115,7 @@ public class ResturantManagmentSystem {
                 int ID = in.nextInt();
                 if (e.login(ID)) {
                     System.out.println("Welcome ");
-                    System.out.println("Enter 1 to update your information\nEnter 2 to add new customer\nEnter 3 to delete an customer with his id\nEnter 4 Seaech about customer\nEnter 5 Display all customers\nEnter 6 Update an customer\nEnter 7 Add new order\nEnter 8 Display all orders\nEnter 9 Cancel order");
+                    System.out.println("Enter 1 to update your information\nEnter 2 to add new customer\nEnter 3 to delete an customer with his id\nEnter 4 Seaech about customer\nEnter 5 Display all customers\nEnter 6 Update an customer\nEnter 7 Add new order\nEnter 8 Display all orders\nEnter 9 Cancel order\nEnter 10 to show the bill of a customer");
                     int enter = in.nextInt();
                     in.nextLine();
                     switch (enter) {
@@ -187,6 +187,11 @@ public class ResturantManagmentSystem {
                             System.out.print("Enter Customer Id:");
                             customerId = in.nextInt();
                             e.CancelOrder(customerId);
+                            break;
+                        case 10:
+                            System.out.print("Enter customer id to show his bill: ");
+                            customerId = in.nextInt();
+                            System.out.println("the bill: " + e.getBill(customerId) + "$");
                             break;
                     }
                 } else {

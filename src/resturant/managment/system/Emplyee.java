@@ -119,6 +119,10 @@ public class Emplyee extends Person {
         Order x = new Order();
         System.out.println(x.displayAllOrders());
     }
+    public double getBill(int customerId) {
+        Order x = new Order();
+        return x.getBillOfCustomer(customerId);
+    }
 
     public void CancelOrder(int CustomerId) {
         Order x = new Order();

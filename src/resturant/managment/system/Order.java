@@ -19,8 +19,8 @@ public class Order {
         double payments = 0;
         setCustomerID(customerId);
         for (String o: orders) {
-            setNewOrder(o);
-            payments += meal.getPrice(o);
+            setNewOrder(o.toLowerCase());
+            payments += meal.getPrice(o.toLowerCase());
         }
         setPayment(payments);
     }
@@ -67,7 +67,7 @@ public class Order {
         return getCustomerID() + "@" + getPayment() + "@" + getOrder();
     }
     private int getOrderndex(int customerId) {
-        for (int i=0;i<Orders.size();i++)
+        for (int i=Orders.size()-1;i>=0;i--)
             if (Orders.get(i).getCustomerID() == customerId)
                 return i;
         return -1;
@@ -75,12 +75,20 @@ public class Order {
     public boolean addOrder() {
         return FManager.write(getOrderData(), OrdersFileName, true);
     }
-    
-    public void cancelOrder(int CustomerId){
+    public double getBillOfCustomer(int customerId) {
         loadFromFile();
-        int index = getOrderndex(CustomerId);
-        Orders.remove(index);
-        commitToFile();
+        return Orders.get(getOrderndex(customerId)).getPayment();
+    }
+    public boolean cancelOrder(int CustomerId){
+        loadFromFile();
+        if (getOrderndex(CustomerId) != -1) {
+            int index = getOrderndex(CustomerId);
+            Orders.remove(index);
+            commitToFile();
+            return true;
+        } else {
+            return false;
+        }
     }
     public String displayAllOrders() {
         loadFromFile();
@@ -92,6 +100,6 @@ public class Order {
     }
     @Override 
     public String toString() {
-        return "Customer ID: " + getCustomerID() + "ALL Orders: " + getOrder() + "All Payment: " + getPayment() + "\n";
+        return "Customer ID: " + getCustomerID() + "\tALL Orders: " + getOrder() + "   All Payment: " + getPayment() + "$" + "\n";
     }
 }

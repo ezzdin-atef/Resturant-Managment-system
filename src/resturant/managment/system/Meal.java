@@ -15,7 +15,7 @@ public class Meal {
         setName(name);
     }
     public void setName(String name) {
-        this.name = name;
+        this.name = name.toLowerCase();
     }
     public void setPrice(double price) {
         this.price = price;
@@ -26,15 +26,20 @@ public class Meal {
     public double getPrice() {
         return this.price;
     }
+    public double getPrice(String name) {
+        loadFromFile();
+        int index = getMealIndex(name);
+        return Meals.get(index).price;
+    }
     private String getMealData() {
-        return this.price + "@" + this.name;
+        return this.price + "@" + this.name.toLowerCase();
     }
     public boolean addMeal() {
         return FManager.write(getMealData(), MealFileName, true);
     }
     private int getMealIndex(String name) {
         for (int i=0;i<Meals.size();i++)
-            if (Meals.get(i).getName().equals(name))
+            if (Meals.get(i).getName().equalsIgnoreCase(name))
                 return i;
         return -1;
     }
@@ -65,11 +70,7 @@ public class Meal {
         else 
             return "\nNot Found ...!";
     }
-    public double getPrice(String name) {
-        loadFromFile();
-        int index = getMealIndex(name);
-        return Meals.get(index).price;
-    }
+
     
     public void updateMeal(String name, Meal x){
         loadFromFile();

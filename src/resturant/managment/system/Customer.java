@@ -69,6 +69,10 @@ public class Customer extends Person {
     
     public void deleteCustomer(int id){
         loadFromFile();
+        Order o = new Order();
+        while (o.cancelOrder(id)) {
+            o.cancelOrder(id);
+        }
         int index = getCustomerIndex(id);
         Customers.remove(index);
         commitToFile();
