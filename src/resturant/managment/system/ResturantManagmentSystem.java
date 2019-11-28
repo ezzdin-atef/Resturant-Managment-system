@@ -1,6 +1,7 @@
 
 package resturant.managment.system;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ResturantManagmentSystem {
@@ -76,8 +77,8 @@ public class ResturantManagmentSystem {
                         case 7:
                             System.out.print("Name of the meal: ");
                             String name = in.nextLine();
-                            System.out.println("Price of The meal: ");
-                            int price = in.nextInt();
+                            System.out.print("Price of The meal: ");
+                            double price = in.nextDouble();
                             x.addNewMeal(price, name);
                             break;
                         case 8:
@@ -98,7 +99,7 @@ public class ResturantManagmentSystem {
                             System.out.print("Enter The Name of The Meal Thats You want to update: ");
                             name = in.nextLine();
                             System.out.print("Enter the new price: ");
-                            price = in.nextInt();
+                            price = in.nextDouble();
                             m.setName(name);
                             m.setPrice(price);
                             x.updateMeal(name, m);
@@ -114,7 +115,7 @@ public class ResturantManagmentSystem {
                 int ID = in.nextInt();
                 if (e.login(ID)) {
                     System.out.println("Welcome ");
-                    System.out.println("Enter 1 to update your information\nEnter 2 to add new customer\nEnter 3 to delete an customer with his id\nEnter 4 Seaech about customer\nEnter 5 Display all customers\nEnter 6 Update an customer");
+                    System.out.println("Enter 1 to update your information\nEnter 2 to add new customer\nEnter 3 to delete an customer with his id\nEnter 4 Seaech about customer\nEnter 5 Display all customers\nEnter 6 Update an customer\nEnter 7 Add new order\nEnter 8 Display all orders\nEnter 9 Cancel order");
                     int enter = in.nextInt();
                     in.nextLine();
                     switch (enter) {
@@ -162,11 +163,37 @@ public class ResturantManagmentSystem {
                             c.setLname(lname);
                             e.updateCustomer(customerId, c);
                             break;
+                        case 7:
+                            System.out.print("Enter Customer Id:");
+                            customerId = in.nextInt();
+                            in.nextLine();
+                            String o;
+                            System.out.print("Enter Customer Orders and between an order and the other an space: ");
+                            ArrayList<String> newOrder = new ArrayList<String>();
+                            while (true) {
+                                o = in.nextLine();
+                                if (o.equals("-1")) {
+                                    break;
+                                } else {
+                                    newOrder.add(o);
+                                }
+                            }
+                            e.addNewOrder(customerId, newOrder);
+                            break;
+                        case 8:
+                            e.displayOrders();
+                            break;
+                        case 9:
+                            System.out.print("Enter Customer Id:");
+                            customerId = in.nextInt();
+                            e.CancelOrder(customerId);
+                            break;
                     }
                 } else {
                     System.out.println("ID Not Found!!");
                 }
                 break;
+                
         }
     }
     

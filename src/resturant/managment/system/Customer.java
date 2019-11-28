@@ -53,6 +53,11 @@ public class Customer extends Person {
         else 
             return "\nNot Found ...!";
     }
+    public boolean existCustomer(int id) {
+        loadFromFile();
+        int index = getCustomerIndex(id);
+        return index != -1;
+    }
     
     public void updateCustomer(int oldID, Customer x){
         loadFromFile();

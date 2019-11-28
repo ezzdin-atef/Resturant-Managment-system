@@ -91,11 +91,26 @@ public class FileManager {
                 String Line = Reader.nextLine();
                 String[] seprator = Line.split("@");
                 
-                x.setPrice(Integer.parseInt(seprator[0]));
+                x.setPrice(Double.parseDouble(seprator[0]));
                 x.setName(seprator[1]);
                 Meals.add(x);
             }
             return (ArrayList<Object>) (Object) Meals;
+        }else if (FilePath.equals("Order.txt")) {
+            ArrayList<Order> Orders = new ArrayList<Order>();
+            Order x;
+            
+            while (Reader.hasNext()) {
+                x = new Order();
+                String Line = Reader.nextLine();
+                String[] seprator = Line.split("@");
+                
+                x.setCustomerID(Integer.parseInt(seprator[0]));
+                x.setPayment(Double.parseDouble(seprator[1]));
+                x.setNewOrder(seprator[2]);
+                Orders.add(x);
+            }
+            return (ArrayList<Object>) (Object) Orders;
         } else {
             return null;
         }

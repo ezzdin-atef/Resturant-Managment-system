@@ -79,7 +79,7 @@ public class Admin extends Person {
     }
     /*================================End Emplyee Part================================*/
     /*================================Start Meals Part================================*/
-    public void addNewMeal(int price, String name) {
+    public void addNewMeal(double price, String name) {
         Meal m = new Meal(price, name);
         if (m.addMeal())
             System.out.println(m.toString() + "Added Successfully ... !");

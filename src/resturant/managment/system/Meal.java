@@ -4,26 +4,26 @@ package resturant.managment.system;
 import java.util.ArrayList;
 
 public class Meal {
-    private int price;
+    private double price;
     private String name;
     private final String MealFileName = "Meal.txt";
     FileManager FManager = new FileManager();
     public static ArrayList <Meal> Meals = new ArrayList<Meal>();
     public Meal() {}
-    public Meal(int price, String name) {
+    public Meal(double price, String name) {
         setPrice(price);
         setName(name);
     }
     public void setName(String name) {
         this.name = name;
     }
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
     public String getName() {
         return this.name;
     }
-    public int getPrice() {
+    public double getPrice() {
         return this.price;
     }
     private String getMealData() {
@@ -64,6 +64,11 @@ public class Meal {
             return "\nFound ...!" + Meals.get(index).toString();
         else 
             return "\nNot Found ...!";
+    }
+    public double getPrice(String name) {
+        loadFromFile();
+        int index = getMealIndex(name);
+        return Meals.get(index).price;
     }
     
     public void updateMeal(String name, Meal x){

@@ -105,7 +105,27 @@ public class Emplyee extends Person {
         System.out.println("deleted Successfully ... !");
     }
     /*================================End Customer Part================================*/
-    
+    /*================================Start Order Part================================*/
+    public void addNewOrder(int customerId, ArrayList<String> orders) {
+        Order x = new Order(customerId, orders);
+        if (x.addOrder()) {
+            System.out.println(x.toString() + "Added Successfully ... !");
+        } else {
+            System.out.println("Failed to insert ... !");
+        }
+    }
+
+    public void displayOrders() {
+        Order x = new Order();
+        System.out.println(x.displayAllOrders());
+    }
+
+    public void CancelOrder(int CustomerId) {
+        Order x = new Order();
+        x.cancelOrder(CustomerId);
+        System.out.println("deleted Successfully ... !");
+    }
+    /*================================End Order Part================================*/
 
     public boolean login(int ID) {
         loadFromFile();
