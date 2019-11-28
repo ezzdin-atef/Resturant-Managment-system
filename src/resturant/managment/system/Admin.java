@@ -105,6 +105,29 @@ public class Admin extends Person {
         System.out.println("deleted Successfully ... !");
     }
     /*================================End Meals Part================================*/
+    /*================================Start Offer Part================================*/
+    public void addNewOffer(String giftName, double maxPyament) {
+        Offer offer = new Offer(maxPyament, giftName);
+        if (offer.addOffer())
+            System.out.println(offer.toString() + "Added Successfully ... !");
+        else
+            System.out.println("Failed to insert ... !");
+    }
+    public void updateOffer(String giftName, Offer newOfferValues) {
+        Offer offer = new Offer();
+        offer.updateOffer(giftName, newOfferValues);
+        System.out.println("Updated Successfully ... !");
+    }
+    public void displayAllOffers() {
+        Offer offer = new Offer();
+        System.out.println(offer.displayAllOffers());
+    }
+    public void deleteOffer(String giftName) {
+        Offer offer = new Offer();
+        offer.deleteOffer(giftName);
+        System.out.println("deleted Successfully ... !");
+    }
+    /*================================End Offer Part================================*/
     public boolean login(String user, String pass) {
         loadFromFile();
         return user.equals((Admins.get(0)).username) && pass.equals((Admins.get(0)).password);

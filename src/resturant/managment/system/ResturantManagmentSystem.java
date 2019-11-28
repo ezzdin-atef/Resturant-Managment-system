@@ -20,7 +20,7 @@ public class ResturantManagmentSystem {
                 System.out.print("Password: ");
                 ps = in.nextLine();
                 if (adm.login(user, ps)) {
-                    System.out.println("Enter 1 To Change Your Information\nEnter 2 to add new Emplyee\nEnter 3 to delete an emplyee with his id\nEnter 4 Seaech about emplyee\nEnter 5 Display all emplyees\nEnter 6 Update an emplyee\nEnter 7 to add new Meal\nEnter 8 to delete an Meal\nEnter 9 Seaech about Meal\nEnter 10 Display all Meals\nEnter 11 Update an Meal");
+                    System.out.println("Enter 1 To Change Your Information\nEnter 2 to add new Emplyee\nEnter 3 to delete an emplyee with his id\nEnter 4 Seaech about emplyee\nEnter 5 Display all emplyees\nEnter 6 Update an emplyee\nEnter 7 to add new Meal\nEnter 8 to delete an Meal\nEnter 9 Seaech about Meal\nEnter 10 Display all Meals\nEnter 11 Update an Meal\nEnter 12 add new offer\nEnter 13 update an offer\nEnter 14 Display all offers\nEnter 15 delete an offer");
                     Admin x = new Admin();
                     int num;
                     num = in.nextInt();
@@ -103,6 +103,31 @@ public class ResturantManagmentSystem {
                             m.setName(name);
                             m.setPrice(price);
                             x.updateMeal(name, m);
+                            break;
+                        case 12:
+                            System.out.print("Enter The Gift Name: ");
+                            String giftName = in.nextLine();
+                            System.out.print("Enter The Max Payment That Need To Be Reach: ");
+                            double maxPayment = in.nextDouble();
+                            x.addNewOffer(giftName, maxPayment);
+                            break;
+                        case 13:
+                            System.out.print("Enter The Old Gift Name: ");
+                            String oldGiftName = in.nextLine();
+                            System.out.print("Enter The New Gift Name: ");
+                            giftName = in.nextLine();
+                            System.out.print("Enter The New Max Payment:");
+                            maxPayment = in.nextInt();
+                            Offer offer = new Offer(maxPayment, giftName);
+                            x.updateOffer(oldGiftName, offer);
+                            break;
+                        case 14:
+                            x.displayAllOffers();
+                            break;
+                        case 15:
+                            System.out.print("Enter The Gift Name To Be Deleted: ");
+                            giftName = in.nextLine();
+                            x.deleteOffer(giftName);
                             break;
                     }
                 } else {

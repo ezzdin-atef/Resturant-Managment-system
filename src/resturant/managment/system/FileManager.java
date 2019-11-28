@@ -111,6 +111,20 @@ public class FileManager {
                 Orders.add(x);
             }
             return (ArrayList<Object>) (Object) Orders;
+        }else if (FilePath.equals("Gifts.txt")) {
+            ArrayList<Offer> Gifts = new ArrayList<Offer>();
+            Offer x;
+            
+            while (Reader.hasNext()) {
+                x = new Offer();
+                String Line = Reader.nextLine();
+                String[] seprator = Line.split("@");
+                
+                x.setGift(seprator[0]);
+                x.setMaxPayment(Double.parseDouble(seprator[1]));
+                Gifts.add(x);
+            }
+            return (ArrayList<Object>) (Object) Gifts;
         } else {
             return null;
         }
