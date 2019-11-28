@@ -44,6 +44,13 @@ public class Offer {
         }
         return -1;
     }
+    public String checkPayment(double payment) {
+        for (int i=0;i<Offers.size();i++) {
+            if (Offers.get(i).getMaxPayment() <= payment)
+                return "Congratulations You Have Got " + Offers.get(i).getGift();
+        }
+        return "Sorry No Gifts!!";
+    }
     public boolean addOffer() {
         return FManager.write(getOfferData(), OfferFileName, true);
     }

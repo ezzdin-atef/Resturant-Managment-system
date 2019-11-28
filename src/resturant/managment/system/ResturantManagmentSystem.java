@@ -217,6 +217,8 @@ public class ResturantManagmentSystem {
                             System.out.print("Enter customer id to show his bill: ");
                             customerId = in.nextInt();
                             System.out.println("the bill: " + e.getBill(customerId) + "$");
+                            Offer gift = new Offer();
+                            System.out.println(gift.checkPayment(e.getBill(customerId)));
                             break;
                     }
                 } else {
