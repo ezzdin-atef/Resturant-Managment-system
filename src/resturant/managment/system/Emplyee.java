@@ -72,7 +72,11 @@ public class Emplyee extends Person {
         Emplyees.remove(index);
         commitToFile();
     } 
-
+    public String getFname(int id) {
+        loadFromFile();
+        int index = getEmlyeeIndex(id);
+        return Emplyees.get(index).getFname();
+    }
     /*================================Start Customer Part================================*/
     public void addNewCustomer(String fname, String lname) {
         Customer x = new Customer(fname, lname);
@@ -130,7 +134,10 @@ public class Emplyee extends Person {
         System.out.println("deleted Successfully ... !");
     }
     /*================================End Order Part================================*/
-
+    public void notification() {
+        Offer offer = new Offer();
+        System.out.println(offer.CheckOffer());
+    }
     public boolean login(int ID) {
         loadFromFile();
         return getEmlyeeIndex(ID)!= -1;

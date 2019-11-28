@@ -139,7 +139,8 @@ public class ResturantManagmentSystem {
                 System.out.print("Enter Your ID: ");
                 int ID = in.nextInt();
                 if (e.login(ID)) {
-                    System.out.println("Welcome ");
+                    System.out.println("Welcome " + e.getFname(ID));
+                    e.notification();
                     System.out.println("Enter 1 to update your information\nEnter 2 to add new customer\nEnter 3 to delete an customer with his id\nEnter 4 Seaech about customer\nEnter 5 Display all customers\nEnter 6 Update an customer\nEnter 7 Add new order\nEnter 8 Display all orders\nEnter 9 Cancel order\nEnter 10 to show the bill of a customer");
                     int enter = in.nextInt();
                     in.nextLine();

@@ -122,6 +122,7 @@ public class FileManager {
                 
                 x.setGift(seprator[0]);
                 x.setMaxPayment(Double.parseDouble(seprator[1]));
+                x.setFlag(Integer.parseInt(seprator[2]));
                 Gifts.add(x);
             }
             return (ArrayList<Object>) (Object) Gifts;

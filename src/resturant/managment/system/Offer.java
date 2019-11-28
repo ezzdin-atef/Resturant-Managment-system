@@ -9,10 +9,12 @@ public class Offer {
     public static ArrayList <Offer> Offers = new ArrayList<Offer>();
     private double maxPayment;
     private String gift;
+    private int flag;
     public Offer() {}
     public Offer(double max, String gift) {
         setMaxPayment(max);
         setGift(gift);
+        setFlag(0);
     }
     public void setGift(String gift) {
         this.gift = gift.toLowerCase();
@@ -20,14 +22,20 @@ public class Offer {
     public void setMaxPayment(double payment) {
         this.maxPayment = payment;
     }
+    public void setFlag(int f) {
+        this.flag = f;
+    }
     public double getMaxPayment() {
         return this.maxPayment;
     }
     public String getGift() {
         return this.gift;
     }
+    public int getFlag() {
+        return this.flag;
+    }
     private String getOfferData() {
-        return getGift() + "@" + getMaxPayment();
+        return getGift() + "@" + getMaxPayment() + "@" + getFlag();
     } 
     private void loadFromFile() {
         Offers = (ArrayList<Offer>) (Object) FManager.read(OfferFileName);
@@ -72,6 +80,18 @@ public class Offer {
         for (Offer o: Offers)
             S = S + o.toString();
         return S;
+    }
+    public String CheckOffer() {
+        loadFromFile();
+        String s = "\nAll New Offers:\n";
+        for (Offer o:Offers) {
+            if (o.getFlag() == 0) {
+                s = s + o.toString();
+                o.setFlag(1);
+            }
+        }
+        commitToFile();
+        return s;
     }
     @Override
     public String toString() {
