@@ -5,14 +5,21 @@ import java.util.ArrayList;
 
 public class Meal {
     private double price;
+    private double discount = 1;
+    private int flag;
     private String name;
     private final String MealFileName = "Meal.txt";
     FileManager FManager = new FileManager();
     public static ArrayList <Meal> Meals = new ArrayList<Meal>();
     public Meal() {}
-    public Meal(double price, String name) {
+    public Meal(double price, String name, double discount) {
         setPrice(price);
         setName(name);
+        setDiscount(discount);
+        setFlag(1);
+    }
+    public Meal(double price, String name) {
+        this(price, name, 1);
     }
     public void setName(String name) {
         this.name = name.toLowerCase();
@@ -20,11 +27,23 @@ public class Meal {
     public void setPrice(double price) {
         this.price = price;
     }
+    public void setDiscount(double discount) {
+        this.discount = discount;
+    }
+    public void setFlag(int f) {
+        this.flag = f;
+    }
     public String getName() {
         return this.name;
     }
     public double getPrice() {
         return this.price;
+    }
+    public double getDiscount() {
+        return this.discount;
+    }
+    public int getFlag() {
+        return this.flag;
     }
     public double getPrice(String name) {
         loadFromFile();
@@ -32,7 +51,7 @@ public class Meal {
         return Meals.get(index).price;
     }
     private String getMealData() {
-        return this.price + "@" + this.name.toLowerCase();
+        return getPrice() + "@" + getName().toLowerCase() + "@" + getDiscount() + "@" + getFlag();
     }
     public boolean addMeal() {
         return FManager.write(getMealData(), MealFileName, true);
@@ -78,6 +97,15 @@ public class Meal {
         Meals.set(index, x);
         commitToFile();
     } 
+    
+    public void makeDiscount(String name, double discount) {
+        Meal x = new Meal();
+        loadFromFile();
+        int index = getMealIndex(name);
+        x.setDiscount(discount);
+        Meals.set(index, x);
+        commitToFile();
+    }
     
     public void deleteMeal(String name){
         loadFromFile();

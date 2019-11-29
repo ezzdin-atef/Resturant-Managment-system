@@ -1,6 +1,2 @@
-10@Egg
-20@Fries
-5@Water
-7.0@Coffee
-3.0@tea
-7.0@salad
+12.0@coffee@1.0@1
+3.0@tea@1.0@1

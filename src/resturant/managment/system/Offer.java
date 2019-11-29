@@ -14,7 +14,7 @@ public class Offer {
     public Offer(double max, String gift) {
         setMaxPayment(max);
         setGift(gift);
-        setFlag(0);
+        setFlag(1);
     }
     public void setGift(String gift) {
         this.gift = gift.toLowerCase();
@@ -85,9 +85,9 @@ public class Offer {
         loadFromFile();
         String s = "\nAll New Offers:\n";
         for (Offer o:Offers) {
-            if (o.getFlag() == 0) {
+            if (o.getFlag() == 1) {
                 s = s + o.toString();
-                o.setFlag(1);
+                o.setFlag(0);
             }
         }
         commitToFile();

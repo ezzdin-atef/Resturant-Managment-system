@@ -99,6 +99,11 @@ public class Admin extends Person {
         m.updateMeal(name, newMealValues);
         System.out.println("Updated Successfully ... !");
     }
+    public void addDiscount (String name, double discount) {
+        Meal m = new Meal();
+        m.makeDiscount(name, discount);
+        System.out.println("Added Successfully ... !");
+    }
     public void deleteMeal(String name) {
         Meal m = new Meal();
         m.deleteMeal(name);

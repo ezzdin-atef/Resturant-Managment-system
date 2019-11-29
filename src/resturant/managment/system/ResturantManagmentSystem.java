@@ -129,6 +129,13 @@ public class ResturantManagmentSystem {
                             giftName = in.nextLine();
                             x.deleteOffer(giftName);
                             break;
+                        case 16:
+                            System.out.print("Enter The Name of The Meal Thats You want to add discount: ");
+                            name = in.nextLine();
+                            System.out.print("Enter The discount: ");
+                            double discount = in.nextDouble();
+                            x.addDiscount(name, discount);
+                            break;
                     }
                 } else {
                     System.out.println("Username or Password is wrong!");
