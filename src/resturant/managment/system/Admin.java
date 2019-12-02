@@ -4,51 +4,27 @@ package resturant.managment.system;
 import java.util.ArrayList;
 
 public class Admin extends Person {
-        
-    protected String username;
-    protected String password;
-    
-    private final String AdminFileName = "Admin.txt";
-    
-    public static ArrayList<Admin> Admins = new ArrayList<Admin>();
-    
     public Admin() {}
-    
-    public void setUsername(String usr) {
-        this.username = usr;
-    }
-    public void setPassword(String pass) {
-        this.password = pass;
-    }
-    
-    public String getUsername() {
-        return username;
-    }
-    public String getPassword() {
-        return password;
-    }
-    private String getAdminData() {
-        return this.id + "@" + this.username + "@" + this.password + "@" + this.fname + "@" + this.lname;
+    public Admin(String fname, String lname, String username, String pass) {
+        super(fname, lname, username, pass);
+        setFlag(1);
     }
     /*================================Start Admin Part================================*/
-    private void commitToFile() {
-        FManager.write(Admins.get(0).getAdminData(), AdminFileName, false);
-    }
     
-    private void loadFromFile() {
-        Admins = (ArrayList<Admin>) (Object) FManager.read(AdminFileName);
-    }
     
+    public boolean addAdmin(Admin x) {
+        return FManager.write(getPersonData(), PersonFileName, true);
+    }
     public void UpdateAdmin(Admin x){
         loadFromFile();
         x.id = 1;
-        Admins.set(0, x);
+        Persons.set(0, x);
         commitToFile();
     }
     /*================================End Admin Part================================*/
     /*================================Start Emplyee Part================================*/
-    public void addNewEmplyee(String fname, String lname) {
-        Emplyee x = new Emplyee(fname, lname);
+    public void addNewEmplyee(String fname, String lname, String username, String pass) {
+        Emplyee x = new Emplyee(fname, lname, username, pass);
         if (x.addEmplyee()) {
             System.out.println(x.toString() + "Added Successfully ... !");
         } else {
@@ -133,9 +109,14 @@ public class Admin extends Person {
         System.out.println("deleted Successfully ... !");
     }
     /*================================End Offer Part================================*/
+    @Override
     public boolean login(String user, String pass) {
         loadFromFile();
-        return user.equals((Admins.get(0)).username) && pass.equals((Admins.get(0)).password);
+        for (int i=0;i<Persons.size();i++) {
+            if (user.equals((Persons.get(i)).username) && pass.equals((Persons.get(i)).password))
+                if (Persons.get(i).flag == 1) return true;
+        }
+        return false;
         //return user.equals("admin") && pass.equals("admin");
     }
     

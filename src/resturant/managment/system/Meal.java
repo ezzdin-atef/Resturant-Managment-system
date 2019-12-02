@@ -50,6 +50,11 @@ public class Meal {
         int index = getMealIndex(name);
         return Meals.get(index).price;
     }
+    public double getDiscount(String name) {
+        loadFromFile();
+        int index = getMealIndex(name);
+        return Meals.get(index).discount;
+    }
     private String getMealData() {
         return getPrice() + "@" + getName().toLowerCase() + "@" + getDiscount() + "@" + getFlag();
     }
@@ -103,6 +108,9 @@ public class Meal {
         loadFromFile();
         int index = getMealIndex(name);
         x.setDiscount(discount);
+        x.setName(name);
+        x.setPrice(Meals.get(index).getPrice());
+        x.setFlag(1);
         Meals.set(index, x);
         commitToFile();
     }
@@ -113,8 +121,20 @@ public class Meal {
         Meals.remove(index);
         commitToFile();
     }
+    public String checkMeals() {
+        loadFromFile();
+        String s = "";
+        for (Meal o:Meals) {
+            if (o.getFlag() == 1) {
+                s = s + o.toString();
+                o.setFlag(0);
+            }
+        }
+        commitToFile();
+        return s;
+    }
     @Override 
     public String toString() {
-        return "Name: " + getName() + ", Price: " + getPrice() + "\n";
+        return "Name: " + getName() + ", Price: " + getPrice() + "  AND Discount with " + getDiscount() * 100 + "%" + "\n";
     }
 }

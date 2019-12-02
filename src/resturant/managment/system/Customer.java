@@ -3,10 +3,13 @@ package resturant.managment.system;
 
 import java.util.ArrayList;
 
-public class Customer extends Person {
-
+public class Customer{
+    protected String fname;
+    protected String lname;
+    protected int id;
     private final String CustomerFileName = "Customer.txt";
     public static ArrayList <Customer> Customers = new ArrayList<Customer>();
+    FileManager FManager = new FileManager();
     public Customer() {}
     public Customer(String firstname, String lastname) {
         loadFromFile();
@@ -26,7 +29,24 @@ public class Customer extends Person {
                 return i;
         return -1;
     }
-    
+    public void setId(int id) {
+        this.id = id;
+    }
+    public void setFname(String name) {
+        this.fname = name;
+    }
+    public void setLname(String name) {
+        this.lname = name;
+    }
+    public int getId() {
+        return id;
+    }
+    public String getFname() {
+        return fname;
+    }
+    public String getLname() {
+        return lname;
+    }
     private void commitToFile() {
         FManager.write(Customers.get(0).getCustomerData(), CustomerFileName, false);
         for(int i=1;i<Customers.size();i++) {
@@ -77,10 +97,6 @@ public class Customer extends Person {
         Customers.remove(index);
         commitToFile();
     } 
-    
-    
-    
-    
     @Override 
     public String toString() {
         return "ID: " + id + ", Name: " + fname + " " + lname + "\n";

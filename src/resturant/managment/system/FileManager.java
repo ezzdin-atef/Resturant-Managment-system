@@ -34,8 +34,8 @@ public class FileManager {
         } catch(FileNotFoundException e) {
             System.out.println(e);
         }
-        if (FilePath.equals("Admin.txt")) {
-            ArrayList<Admin> Admin = new ArrayList<Admin>();
+        if (FilePath.equals("person.txt")) {
+            ArrayList<Person> Persons = new ArrayList<Person>();
             Admin x;
             
             while (Reader.hasNext()) {
@@ -49,24 +49,10 @@ public class FileManager {
                 x.setPassword(seprator[2]);
                 x.setFname(seprator[3]);
                 x.setLname(seprator[4]);
-                Admin.add(x);
+                x.setFlag(Integer.parseInt(seprator[5]));
+                Persons.add(x);
             }
-            return (ArrayList<Object>) (Object) Admin;
-        }else if (FilePath.equals("Employees.txt")) {
-            ArrayList<Emplyee> Emplyees = new ArrayList<Emplyee>();
-            Emplyee x;
-            
-            while (Reader.hasNext()) {
-                x = new Emplyee();
-                String Line = Reader.nextLine();
-                String[] seprator = Line.split("@");
-                
-                x.setId(Integer.parseInt(seprator[0]));
-                x.setFname(seprator[1]);
-                x.setLname(seprator[2]);
-                Emplyees.add(x);
-            }
-            return (ArrayList<Object>) (Object) Emplyees;
+            return (ArrayList<Object>) (Object) Persons;
         }else if (FilePath.equals("Customer.txt")) {
             ArrayList<Customer> Customers = new ArrayList<Customer>();
             Customer x;
@@ -93,6 +79,8 @@ public class FileManager {
                 
                 x.setPrice(Double.parseDouble(seprator[0]));
                 x.setName(seprator[1]);
+                x.setDiscount(Double.parseDouble(seprator[2]));
+                x.setFlag(Integer.parseInt(seprator[3]));
                 Meals.add(x);
             }
             return (ArrayList<Object>) (Object) Meals;

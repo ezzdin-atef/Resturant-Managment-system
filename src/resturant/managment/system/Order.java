@@ -20,7 +20,7 @@ public class Order {
         setCustomerID(customerId);
         for (String o: orders) {
             setNewOrder(o.toLowerCase());
-            payments += meal.getPrice(o.toLowerCase());
+            payments += meal.getPrice(o.toLowerCase()) * meal.getDiscount(o.toLowerCase());
         }
         setPayment(payments);
     }

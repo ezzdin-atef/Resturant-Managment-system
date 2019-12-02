@@ -4,46 +4,27 @@ package resturant.managment.system;
 import java.util.ArrayList;
 public class Emplyee extends Person {
     
-    private final String EmplyeeFileName = "Employees.txt";
-    public static ArrayList<Emplyee> Emplyees = new ArrayList<Emplyee>();
-    
     public Emplyee() {}
-    public Emplyee(String firstName, String lastName) {
-        loadFromFile();
-        setId( Emplyees.get(Emplyees.size()-1).getId()+1 );
-        setFname(firstName);
-        setLname(lastName);
+    public Emplyee(String fname, String lname, String username, String pass) {
+        super(fname, lname, username, pass);
+        setFlag(0);
     }
     
     public boolean addEmplyee() {
-        return FManager.write(getEmplyeeData(), EmplyeeFileName, true);
-    }
-    private String getEmplyeeData() {
-        return this.id + "@" + this.fname + "@" + this.lname;
+        return FManager.write(getPersonData(), PersonFileName, true);
     }
     private int getEmlyeeIndex(int id){
-        for (int i = 0; i < Emplyees.size(); i++)
-            if(Emplyees.get(i).getId()== id)
+        for (int i = 0; i < Persons.size(); i++)
+            if(Persons.get(i).getId()== id)
                 return i;
         
         return -1;
     }
     
-    private void commitToFile() {
-        FManager.write(Emplyees.get(0).getEmplyeeData(), EmplyeeFileName, false);
-        for (int i = 1; i < Emplyees.size(); i++) {
-            FManager.write(Emplyees.get(i).getEmplyeeData(), EmplyeeFileName, true);
-        }
-    }
-    
-    private void loadFromFile() {
-        Emplyees = (ArrayList<Emplyee>) (Object) FManager.read(EmplyeeFileName);
-    }
-    
     public String displayAllEmplyee() {
         loadFromFile();
         String S = "\nAll Emplyees Data:\n";
-        for (Emplyee x : Emplyees) {
+        for (Person x : Persons) {
             S = S + x.toString();
         }
         return S;
@@ -53,7 +34,7 @@ public class Emplyee extends Person {
         loadFromFile();
         int index = getEmlyeeIndex(id);
         if(index != -1)
-            return "\nFound ...!" + Emplyees.get(index).toString();
+            return "\nFound ...!" + Persons.get(index).toString();
         else 
             return "\nNot Found ...!";
     }
@@ -61,21 +42,24 @@ public class Emplyee extends Person {
     public void updateEmplyee(int oldID, Emplyee x){
         loadFromFile();
         int index = getEmlyeeIndex(oldID);
-        x.id = Emplyees.get(index).id;
-        Emplyees.set(index, x);
+        x.id = Persons.get(index).id;
+        Persons.set(index, x);
         commitToFile();
     } 
     
     public void deleteEmplyee(int id){
         loadFromFile();
         int index = getEmlyeeIndex(id);
-        Emplyees.remove(index);
+        Persons.remove(index);
         commitToFile();
     } 
-    public String getFname(int id) {
+    public String getFname(String user) {
         loadFromFile();
-        int index = getEmlyeeIndex(id);
-        return Emplyees.get(index).getFname();
+        int index = -1;
+        for (int i = 0; i < Persons.size(); i++)
+            if(Persons.get(i).getUsername().equals(user))
+                index = i;
+        return Persons.get(index).getFname();
     }
     /*================================Start Customer Part================================*/
     public void addNewCustomer(String fname, String lname) {
@@ -136,17 +120,25 @@ public class Emplyee extends Person {
     /*================================End Order Part================================*/
     public void notification() {
         Offer offer = new Offer();
+        Meal meal = new Meal();
         System.out.println(offer.CheckOffer());
+        System.out.println(meal.checkMeals());
     }
-    public boolean login(int ID) {
+    
+    
+    @Override
+    public boolean login(String user, String pass) {
         loadFromFile();
-        return getEmlyeeIndex(ID)!= -1;
+        for (int i=0;i<Persons.size();i++) {
+            if (user.equals((Persons.get(i)).username) && pass.equals((Persons.get(i)).password))
+                if (Persons.get(i).flag == 0) return true;
+        }
+        return false;
+        //return user.equals("admin") && pass.equals("admin");
     }
-    
-    
     @Override 
     public String toString() {
-        return "ID: " + id + ", Name: " + fname + " " + lname + '\n';
+        return "ID: " + getId() + ", Name: " + getFname() + " " + getLname() + ", Username: " + getUsername() + " & Password: " + getPassword()  + '\n';
     }
 
 }
