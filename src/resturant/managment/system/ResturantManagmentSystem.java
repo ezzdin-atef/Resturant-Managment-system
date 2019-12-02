@@ -180,7 +180,8 @@ public class ResturantManagmentSystem {
                                     + "Enter 7 Add new order\n"
                                     + "Enter 8 Display all orders\n"
                                     + "Enter 9 Cancel order\n"
-                                    + "Enter 10 to show the bill of a customer");
+                                    + "Enter 10 to show the bill of a customer\n"
+                                    + "Enter 11 to display Customer Profile");
                     int enter = in.nextInt();
                     in.nextLine();
                     switch (enter) {
@@ -266,9 +267,14 @@ public class ResturantManagmentSystem {
                             Offer gift = new Offer();
                             System.out.println(gift.checkPayment(e.getBill(customerId)));
                             break;
+                        case 11: // display Customer Profile
+                            System.out.print("Enter Customer Id:");
+                            customerId = in.nextInt();
+                            e.displayCustomerProfile(customerId);
+                            break;
                     }
                 } else {
-                    System.out.println("ID Not Found!!");
+                    System.out.println("Username or Password is wrong!");
                 }
                 break;
                 

@@ -92,6 +92,12 @@ public class Emplyee extends Person {
         x.deleteCustomer(Id);
         System.out.println("deleted Successfully ... !");
     }
+    public void displayCustomerProfile(int id) {
+        Customer c = new Customer();
+        System.out.println(c.searchCustomer(id) + "\n");
+        Order o = new Order();
+        System.out.println(o.getAllOrderToCustomer(id));
+    }
     /*================================End Customer Part================================*/
     /*================================Start Order Part================================*/
     public void addNewOrder(int customerId, ArrayList<String> orders) {

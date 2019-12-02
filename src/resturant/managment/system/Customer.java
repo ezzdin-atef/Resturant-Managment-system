@@ -69,7 +69,7 @@ public class Customer{
         loadFromFile();
         int index = getCustomerIndex(id);
         if(index != -1)
-            return "\nFound ...!" + Customers.get(index).toString();
+            return Customers.get(index).toString();
         else 
             return "\nNot Found ...!";
     }

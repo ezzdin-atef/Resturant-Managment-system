@@ -98,6 +98,14 @@ public class Order {
         }
         return S;
     }
+    public String getAllOrderToCustomer(int customerID) {
+        String s = "";
+        loadFromFile();
+        for (int i=Orders.size()-1;i>=0;i--)
+            if (Orders.get(i).getCustomerID() == customerID)
+                s  = s + Orders.get(i).toString() + "\n";
+        return s;
+    }
     @Override 
     public String toString() {
         return "Customer ID: " + getCustomerID() + "\tALL Orders: " + getOrder() + "   All Payment: " + getPayment() + "$" + "\n";
