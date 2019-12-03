@@ -1,9 +1,10 @@
 
 package resturant.managment.system;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Admin extends Person {
+public class Admin extends Person implements Serializable {
     public Admin() {}
     public Admin(String fname, String lname, String username, String pass) {
         super(fname, lname, username, pass);
@@ -13,7 +14,7 @@ public class Admin extends Person {
     
     
     public boolean addAdmin(Admin x) {
-        return FManager.write(getPersonData(), PersonFileName, true);
+        return FManager.write(PersonFileName, Persons);
     }
     public void UpdateAdmin(Admin x){
         loadFromFile();

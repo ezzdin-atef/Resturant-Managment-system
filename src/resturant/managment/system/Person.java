@@ -1,36 +1,38 @@
 
 package resturant.managment.system;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Person {
+public abstract class Person implements Serializable {
     protected int id = 2;
     protected String username;
     protected String password;
     protected String fname;
     protected String lname;
     protected int flag = 0;
-    protected final String PersonFileName = "person.txt";
+    protected final String PersonFileName = "person.bin";
     public static ArrayList<Person> Persons = new ArrayList<Person>();
     FileManager FManager = new FileManager();
     public Person() {}
     public Person(String fname, String lname, String username, String pass) {
         loadFromFile();
-        setId(Persons.get(Persons.size()-1).getId() + 1);
+        if (Persons.size() == 0) 
+            setId(1);
+        else
+            setId(Persons.get(Persons.size()-1).getId() + 1);
         setFname(fname);
         setLname(lname);
         setUsername(username);
         setPassword(pass);
         setFlag(0);
     }
-    protected void commitToFile() {
-        FManager.write(Persons.get(0).getPersonData(), PersonFileName, false);
-        for (int i=1;i<Persons.size();i++)
-            FManager.write(Persons.get(i).getPersonData(), PersonFileName, true);
+    public void commitToFile() {
+        FManager.write(PersonFileName, Persons);
     }
     
-    protected void loadFromFile() {
-        Persons = (ArrayList<Person>) (Object) FManager.read(PersonFileName);
+    public void loadFromFile() {
+        Persons = (ArrayList<Person>) FManager.read(PersonFileName);
     }
     protected String getPersonData() {
         return this.id + "@" + this.username + "@" + this.password + "@" + this.fname + "@" + this.lname + "@" + this.flag;
