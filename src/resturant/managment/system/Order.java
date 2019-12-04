@@ -1,14 +1,15 @@
 
 package resturant.managment.system;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Order {
+public class Order implements Serializable {
     Meal meal = new Meal();
     Customer customer = new Customer();
     Scanner in = new Scanner(System.in);
-    private final String OrdersFileName = "Order.txt";
+    private final String OrdersFileName = "Order.bin";
     FileManager FManager = new FileManager();
     public static ArrayList <Order> Orders = new ArrayList<Order>();
     private ArrayList<String> newOrder = new ArrayList<String>();
@@ -54,13 +55,10 @@ public class Order {
     public ArrayList<String> getOrder() {
         return this.newOrder;
     }
-    private void commitToFile() {
-        FManager.write(Orders.get(0).getOrderData(), OrdersFileName, false);
-        for(int i=1;i<Orders.size();i++) {
-            FManager.write(Orders.get(i).getOrderData(), OrdersFileName, true);
-        }
+    public void commitToFile() {
+        FManager.write(OrdersFileName, Orders);
     }
-    private void loadFromFile() {
+    public void loadFromFile() {
         Orders = (ArrayList<Order>) (Object) FManager.read(OrdersFileName);
     }
     private String getOrderData() {
@@ -73,7 +71,7 @@ public class Order {
         return -1;
     }
     public boolean addOrder() {
-        return FManager.write(getOrderData(), OrdersFileName, true);
+        return FManager.write(OrdersFileName, Orders);
     }
     public double getBillOfCustomer(int customerId) {
         loadFromFile();

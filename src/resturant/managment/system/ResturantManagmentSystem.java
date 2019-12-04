@@ -1,12 +1,19 @@
 
 package resturant.managment.system;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ResturantManagmentSystem {
 
     public static void main(String[] args) {
+        Admin add =new Admin();
+        //add.addNewAdmin("a", "a", "a", "a");
+        add.displayAllAdmins();
+        String projectPath = System.getProperty("user.dir");
+        File currentDir = new File(projectPath); // current directory				
+	checkDirectoryContents(currentDir);
         Scanner in = new Scanner(System.in);
         System.out.println("Enter 1 to log in as admin\nEnter 2 to log in as emplyee");
         int log = in.nextInt();
@@ -55,6 +62,7 @@ public class ResturantManagmentSystem {
                             x.setPassword(newpass);
                             x.setFname(nfname);
                             x.setLname(nlname);
+                            x.setFlag(1);
                             adm.UpdateAdmin(x);
                             break;
                         case 2: // add new Emplyee
@@ -280,5 +288,51 @@ public class ResturantManagmentSystem {
                 
         }
     }
-    
+    public static void checkDirectoryContents(File dir){
+        File[] files = dir.listFiles();
+        boolean PersonFile = true;
+        boolean CustomerFile = true;
+        boolean MealFile = true;
+        boolean GiftFile = true;
+        boolean OrderFile = true;
+
+        for (File file : files) {
+
+            if (file.getName().contains("Person.bin")) {
+                PersonFile = false;
+            } else if (file.getName().contains("Customer.bin")) {
+                CustomerFile = false;
+            } else if (file.getName().contains("Meal.bin")) {
+                MealFile = false;
+            } else if (file.getName().contains("Gifts.bin")) {
+                GiftFile = false;
+            } else if (file.getName().contains("Order.bin")) {
+                OrderFile = false;
+            }
+        }
+        if (PersonFile) {
+            Admin x = new Admin();
+            x.commitToFile();
+        } 
+        
+        if (CustomerFile) {
+            Customer x = new Customer();
+            x.commitToFile();
+        } 
+        
+        if (MealFile) {
+            Meal x = new Meal();
+            x.commitToFile();
+        } 
+        
+        if (GiftFile) {
+            Offer x = new Offer();
+            x.commitToFile();
+        } 
+        
+        if (OrderFile) {
+            Order x = new Order();
+            x.commitToFile();
+        }
+    }
 }

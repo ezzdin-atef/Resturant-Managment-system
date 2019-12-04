@@ -1,8 +1,9 @@
 
 package resturant.managment.system;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-public class Emplyee extends Person {
+public class Emplyee extends Person implements Serializable {
     
     public Emplyee() {}
     public Emplyee(String fname, String lname, String username, String pass) {
@@ -11,7 +12,8 @@ public class Emplyee extends Person {
     }
     
     public boolean addEmplyee() {
-        return FManager.write(getPersonData(), PersonFileName, true);
+        Persons.add(this);
+        return FManager.write(PersonFileName, Persons);
     }
     private int getEmlyeeIndex(int id){
         for (int i = 0; i < Persons.size(); i++)
