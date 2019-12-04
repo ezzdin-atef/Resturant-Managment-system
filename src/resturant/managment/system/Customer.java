@@ -14,7 +14,8 @@ public class Customer implements Serializable{
     public Customer() {}
     public Customer(String firstname, String lastname) {
         loadFromFile();
-        setId( Customers.get(Customers.size()-1).getId()+1 );
+        if (Customers.size() == 0) setId(1);
+        else setId( Customers.get(Customers.size()-1).getId()+1 );
         setFname(firstname);
         setLname(lastname);
     }

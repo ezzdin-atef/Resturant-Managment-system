@@ -27,7 +27,8 @@ public class Emplyee extends Person implements Serializable {
         loadFromFile();
         String S = "\nAll Emplyees Data:\n";
         for (Person x : Persons) {
-            S = S + x.toString();
+            if (x.getFlag() == 0)
+                S = S + x.toString();
         }
         return S;
     }
@@ -129,6 +130,7 @@ public class Emplyee extends Person implements Serializable {
     public void notification() {
         Offer offer = new Offer();
         Meal meal = new Meal();
+        System.out.println("All New Meals & Offers");
         System.out.println(offer.CheckOffer());
         System.out.println(meal.checkMeals());
     }

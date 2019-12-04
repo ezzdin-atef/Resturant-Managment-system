@@ -71,6 +71,8 @@ public class Order implements Serializable {
         return -1;
     }
     public boolean addOrder() {
+        loadFromFile();
+        Orders.add(this);
         return FManager.write(OrdersFileName, Orders);
     }
     public double getBillOfCustomer(int customerId) {

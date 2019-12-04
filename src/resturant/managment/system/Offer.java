@@ -83,7 +83,7 @@ public class Offer implements Serializable {
     }
     public String CheckOffer() {
         loadFromFile();
-        String s = "\nAll New Offers:\n";
+        String s = "";
         for (Offer o:Offers) {
             if (o.getFlag() == 1) {
                 s = s + o.toString();

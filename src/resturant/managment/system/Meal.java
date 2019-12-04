@@ -60,6 +60,7 @@ public class Meal implements Serializable {
         return getPrice() + "@" + getName().toLowerCase() + "@" + getDiscount() + "@" + getFlag();
     }
     public boolean addMeal() {
+        loadFromFile();
         Meals.add(this);
         return FManager.write(MealFileName, Meals);
     }
@@ -134,6 +135,9 @@ public class Meal implements Serializable {
     }
     @Override 
     public String toString() {
-        return "Name: " + getName() + ", Price: " + getPrice() + "  AND Discount with " + getDiscount() * 100 + "%" + "\n";
+        if (getDiscount() == 1)
+            return "Name: " + getName() + ", Price: " + getPrice() + "$" + "\n";
+        else
+            return "Name: " + getName() + ", Price: " + getPrice() + "$" + "  AND Discount with " + getDiscount() * 100 + "%" + "\n";
     }
 }
