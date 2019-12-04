@@ -1,11 +1,10 @@
 
 package resturant.managment.system;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Offer implements Serializable {
-    private final String OfferFileName = "Gifts.bin";
+public class Offer {
+    private final String OfferFileName = "Gifts.txt";
     FileManager FManager = new FileManager();
     public static ArrayList <Offer> Offers = new ArrayList<Offer>();
     private double maxPayment;
@@ -38,11 +37,13 @@ public class Offer implements Serializable {
     private String getOfferData() {
         return getGift() + "@" + getMaxPayment() + "@" + getFlag();
     } 
-    public void loadFromFile() {
+    private void loadFromFile() {
         Offers = (ArrayList<Offer>) (Object) FManager.read(OfferFileName);
     }
-    public void commitToFile() {
-        FManager.write(OfferFileName, Offers);
+    private void commitToFile() {
+        FManager.write(Offers.get(0).getOfferData(), OfferFileName, false);
+        for (int i=1;i<Offers.size();i++)
+            FManager.write(Offers.get(i).getOfferData(), OfferFileName, true);
     }
     public int getOfferIndex(String giftName) {
         for (int i=0;i<Offers.size();i++) {
@@ -59,8 +60,7 @@ public class Offer implements Serializable {
         return "Sorry No Gifts!!";
     }
     public boolean addOffer() {
-        Offers.add(this);
-        return FManager.write(OfferFileName, Offers);
+        return FManager.write(getOfferData(), OfferFileName, true);
     }
     public void updateOffer(String giftName, Offer o) {
         loadFromFile();
