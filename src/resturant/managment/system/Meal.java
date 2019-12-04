@@ -1,15 +1,14 @@
 
 package resturant.managment.system;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Meal implements Serializable {
+public class Meal {
     private double price;
     private double discount = 1;
     private int flag;
     private String name;
-    private final String MealFileName = "Meal.bin";
+    private final String MealFileName = "Meal.txt";
     FileManager FManager = new FileManager();
     public static ArrayList <Meal> Meals = new ArrayList<Meal>();
     public Meal() {}
@@ -60,8 +59,7 @@ public class Meal implements Serializable {
         return getPrice() + "@" + getName().toLowerCase() + "@" + getDiscount() + "@" + getFlag();
     }
     public boolean addMeal() {
-        Meals.add(this);
-        return FManager.write(MealFileName, Meals);
+        return FManager.write(getMealData(), MealFileName, true);
     }
     private int getMealIndex(String name) {
         for (int i=0;i<Meals.size();i++)
@@ -70,10 +68,13 @@ public class Meal implements Serializable {
         return -1;
     }
     
-    public void commitToFile() {
-        FManager.write(MealFileName, Meals);
+    private void commitToFile() {
+        FManager.write(Meals.get(0).getMealData(), MealFileName, false);
+        for(int i=1;i<Meals.size();i++) {
+            FManager.write(Meals.get(i).getMealData(), MealFileName, true);
+        }
     }
-    public void loadFromFile() {
+    private void loadFromFile() {
         Meals = (ArrayList<Meal>) (Object) FManager.read(MealFileName);
     }
     public String displayAllMeal() {

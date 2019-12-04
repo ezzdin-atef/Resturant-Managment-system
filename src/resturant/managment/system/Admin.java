@@ -1,10 +1,9 @@
 
 package resturant.managment.system;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Admin extends Person implements Serializable {
+public class Admin extends Person {
     public Admin() {}
     public Admin(String fname, String lname, String username, String pass) {
         super(fname, lname, username, pass);
@@ -13,25 +12,8 @@ public class Admin extends Person implements Serializable {
     /*================================Start Admin Part================================*/
     
     
-    public boolean addAdmin() {
-        Persons.add(this);
-        return FManager.write(PersonFileName, Persons);
-    }
-    public void addNewAdmin(String fname, String lname, String username, String pass) {
-        Admin x = new Admin(fname, lname, username, pass);
-        if (x.addAdmin()) {
-            System.out.println(x.toString() + "Added Successfully ... !");
-        } else {
-            System.out.println("Failed to insert ... !");
-        }
-    }
-    public void displayAllAdmins() {
-        loadFromFile();
-        String S = "\nAll Admins Data:\n";
-        for (Person x : Persons) {
-            S = S + x.toString();
-        }
-        System.out.println(S);
+    public boolean addAdmin(Admin x) {
+        return FManager.write(getPersonData(), PersonFileName, true);
     }
     public void UpdateAdmin(Admin x){
         loadFromFile();
@@ -136,10 +118,6 @@ public class Admin extends Person implements Serializable {
         }
         return false;
         //return user.equals("admin") && pass.equals("admin");
-    }
-    @Override 
-    public String toString() {
-        return "ID: " + getId() + ", Name: " + getFname() + " " + getLname() + ", Username: " + getUsername() + " & Password: " + getPassword()  + " " + getFlag() + '\n';
     }
     
 }

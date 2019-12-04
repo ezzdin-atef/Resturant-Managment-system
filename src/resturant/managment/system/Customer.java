@@ -1,14 +1,13 @@
 
 package resturant.managment.system;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Customer implements Serializable{
+public class Customer{
     protected String fname;
     protected String lname;
     protected int id;
-    private final String CustomerFileName = "Customer.bin";
+    private final String CustomerFileName = "Customer.txt";
     public static ArrayList <Customer> Customers = new ArrayList<Customer>();
     FileManager FManager = new FileManager();
     public Customer() {}
@@ -22,8 +21,7 @@ public class Customer implements Serializable{
         return this.id + "@" + this.fname + "@" + this.lname;
     }
     public boolean addCustomer() {
-        Customers.add(this);
-        return FManager.write(CustomerFileName, Customers);
+        return FManager.write(getCustomerData(), CustomerFileName, true);
     }
     private int getCustomerIndex(int id) {
         for (int i=0;i<Customers.size();i++)
@@ -49,9 +47,11 @@ public class Customer implements Serializable{
     public String getLname() {
         return lname;
     }
-    public void commitToFile() {
-        FManager.write(CustomerFileName, Customers);
-        
+    private void commitToFile() {
+        FManager.write(Customers.get(0).getCustomerData(), CustomerFileName, false);
+        for(int i=1;i<Customers.size();i++) {
+            FManager.write(Customers.get(i).getCustomerData(), CustomerFileName, true);
+        }
     }
     private void loadFromFile() {
         Customers = (ArrayList<Customer>) (Object) FManager.read(CustomerFileName);
