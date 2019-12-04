@@ -60,6 +60,7 @@ public class Meal implements Serializable {
         return getPrice() + "@" + getName().toLowerCase() + "@" + getDiscount() + "@" + getFlag();
     }
     public boolean addMeal() {
+        Meals.add(this);
         return FManager.write(MealFileName, Meals);
     }
     private int getMealIndex(String name) {
@@ -73,7 +74,7 @@ public class Meal implements Serializable {
         FManager.write(MealFileName, Meals);
     }
     public void loadFromFile() {
-        Meals = (ArrayList<Meal>) FManager.read(MealFileName);
+        Meals = (ArrayList<Meal>) (Object) FManager.read(MealFileName);
     }
     public String displayAllMeal() {
         loadFromFile();

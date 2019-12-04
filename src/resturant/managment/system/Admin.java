@@ -13,8 +13,25 @@ public class Admin extends Person implements Serializable {
     /*================================Start Admin Part================================*/
     
     
-    public boolean addAdmin(Admin x) {
+    public boolean addAdmin() {
+        Persons.add(this);
         return FManager.write(PersonFileName, Persons);
+    }
+    public void addNewAdmin(String fname, String lname, String username, String pass) {
+        Admin x = new Admin(fname, lname, username, pass);
+        if (x.addAdmin()) {
+            System.out.println(x.toString() + "Added Successfully ... !");
+        } else {
+            System.out.println("Failed to insert ... !");
+        }
+    }
+    public void displayAllAdmins() {
+        loadFromFile();
+        String S = "\nAll Admins Data:\n";
+        for (Person x : Persons) {
+            S = S + x.toString();
+        }
+        System.out.println(S);
     }
     public void UpdateAdmin(Admin x){
         loadFromFile();
@@ -119,6 +136,10 @@ public class Admin extends Person implements Serializable {
         }
         return false;
         //return user.equals("admin") && pass.equals("admin");
+    }
+    @Override 
+    public String toString() {
+        return "ID: " + getId() + ", Name: " + getFname() + " " + getLname() + ", Username: " + getUsername() + " & Password: " + getPassword()  + " " + getFlag() + '\n';
     }
     
 }

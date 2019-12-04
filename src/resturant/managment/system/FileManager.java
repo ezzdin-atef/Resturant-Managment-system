@@ -1,6 +1,7 @@
 
 package resturant.managment.system;
 
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -18,9 +19,11 @@ import java.util.logging.Logger;
 
 public class FileManager implements Serializable {
     public boolean write(String FilePath, Object data) {
+        ObjectOutputStream writter;
         try {
-            ObjectOutputStream writter = new ObjectOutputStream(new FileOutputStream(FilePath));
+            writter = new ObjectOutputStream(new FileOutputStream(FilePath));
             writter.writeObject(data);
+            writter.flush();
             writter.close();
             return true;
         } catch (FileNotFoundException ex) {
@@ -31,18 +34,22 @@ public class FileManager implements Serializable {
         return false;
     }
     
-    public Object read(String FilePath) {
-        Object Result = null;
+    public ArrayList<Object> read(String FilePath) {
+        ArrayList Result = new ArrayList() ;
+        ObjectInputStream Reader;
         try {
-            ObjectInputStream Reader = new ObjectInputStream(new FileInputStream(FilePath));
-            Result = Reader.readObject();
+            Reader = new ObjectInputStream(new FileInputStream(FilePath));
+            Result = (ArrayList) Reader.readObject();
+            Reader.close();
+        } catch(EOFException e) {
+            System.out.print("");
         } catch (FileNotFoundException ex) {
             Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return Result;
+        return (ArrayList<Object>) (Object) Result;
     }
+    
+    
 }

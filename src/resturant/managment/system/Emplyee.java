@@ -12,6 +12,7 @@ public class Emplyee extends Person implements Serializable {
     }
     
     public boolean addEmplyee() {
+        Persons.add(this);
         return FManager.write(PersonFileName, Persons);
     }
     private int getEmlyeeIndex(int id){

@@ -59,6 +59,7 @@ public class Offer implements Serializable {
         return "Sorry No Gifts!!";
     }
     public boolean addOffer() {
+        Offers.add(this);
         return FManager.write(OfferFileName, Offers);
     }
     public void updateOffer(String giftName, Offer o) {

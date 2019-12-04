@@ -22,6 +22,7 @@ public class Customer implements Serializable{
         return this.id + "@" + this.fname + "@" + this.lname;
     }
     public boolean addCustomer() {
+        Customers.add(this);
         return FManager.write(CustomerFileName, Customers);
     }
     private int getCustomerIndex(int id) {
@@ -53,7 +54,7 @@ public class Customer implements Serializable{
         
     }
     private void loadFromFile() {
-        Customers = (ArrayList<Customer>) FManager.read(CustomerFileName);
+        Customers = (ArrayList<Customer>) (Object) FManager.read(CustomerFileName);
     }
     public String displayAllCustomer() {
         loadFromFile();

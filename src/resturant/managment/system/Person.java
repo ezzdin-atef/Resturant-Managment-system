@@ -32,7 +32,7 @@ public abstract class Person implements Serializable {
     }
     
     public void loadFromFile() {
-        Persons = (ArrayList<Person>) FManager.read(PersonFileName);
+        Persons = (ArrayList<Person>) (Object) FManager.read(PersonFileName);
     }
     protected String getPersonData() {
         return this.id + "@" + this.username + "@" + this.password + "@" + this.fname + "@" + this.lname + "@" + this.flag;

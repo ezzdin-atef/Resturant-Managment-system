@@ -8,6 +8,9 @@ import java.util.Scanner;
 public class ResturantManagmentSystem {
 
     public static void main(String[] args) {
+        Admin add =new Admin();
+        //add.addNewAdmin("a", "a", "a", "a");
+        add.displayAllAdmins();
         String projectPath = System.getProperty("user.dir");
         File currentDir = new File(projectPath); // current directory				
 	checkDirectoryContents(currentDir);
@@ -59,6 +62,7 @@ public class ResturantManagmentSystem {
                             x.setPassword(newpass);
                             x.setFname(nfname);
                             x.setLname(nlname);
+                            x.setFlag(1);
                             adm.UpdateAdmin(x);
                             break;
                         case 2: // add new Emplyee
