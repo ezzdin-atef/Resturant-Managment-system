@@ -6,9 +6,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Order implements Serializable {
+    static final long serialVersionUID = 1L;
     Meal meal = new Meal();
     Customer customer = new Customer();
-    Scanner in = new Scanner(System.in);
+    static Scanner in = new Scanner(System.in);
     private final String OrdersFileName = "Order.bin";
     FileManager FManager = new FileManager();
     public static ArrayList <Order> Orders = new ArrayList<Order>();

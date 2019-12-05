@@ -5,9 +5,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ResturantManagmentSystem {
+public class ResturantManagmentSystem  {
 
+    static final long serialVersionUID = 1L;
     public static void main(String[] args) {
+
         Admin add =new Admin();
         //add.addNewAdmin("a", "a", "a", "a");
         add.displayAllAdmins();
